@@ -1,7 +1,9 @@
 import User from "../models/User.model.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import cook from "cookie-parser"
+import cloudinary from "../lib/cloudinary.js"
+
+
 export const signup=async(req,res)=>{
     try{
  const {name,email,password}=req.body;
@@ -51,4 +53,31 @@ try {
     res.status(500).json(err);
     
 }
+}
+export const logout=(req,res)=>{
+ try{
+res.clearCookie("token")
+res.status(200).json({msg:"Loggoed out scucessfully"})
+ }catch(err){
+ console.log(err);
+ res.status(500).json(err);
+ }
+}
+export const updateProfile=async(req,res)=>{
+    try {
+        const {profilePic}=req.body;
+       const userid=req.user._id;
+        if(!profilePic){
+            res.status(400).json({msg:"Profile pic not uploaded"})
+        
+        }
+        const resp=await cloudinary.uploader.upload(profilePic);
+        console.log(resp);
+    const updatedpic=await User.findByIdAndUpdate(userid,{profilePic:resp.secure_url});
+
+    res.status(200).json(updatedpic)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
 }

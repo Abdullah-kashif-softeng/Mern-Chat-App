@@ -1,10 +1,11 @@
 import express from "express"
-import {login, signup}from "../controllers/auth.controller.js"
+import {login, logout, signup, updateProfile}from "../controllers/auth.controller.js"
+import { authRoute } from "../middleware/auth.middleware.js";
 const route=express.Router();
 
 route.post("/signup",signup);
-route.post("/login",login)
-route.get("/signout",(req,res)=>{
-    res.send("signout route");
-})
+route.post("/login",login);
+route.post("/logout",logout);
+
+route.put("/update-profile",authRoute,updateProfile)
 export default route;
