@@ -30,7 +30,7 @@ const App = () => {
   <Route path='/profile' element={<ProfilePage/>}/>
   
       </Routes>
-      <span className="loading loading-spinner loading-lg"></span>
+     
      
       </div>
     </>

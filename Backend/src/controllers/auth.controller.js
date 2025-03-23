@@ -8,15 +8,15 @@ export const signup=async(req,res)=>{
     try{
  const {name,email,password}=req.body;
  if(password.length<9){
-    res.status(400).json({message:"Password must be atleast 9 characters"});
+  return  res.status(400).json({message:"Password must be atleast 9 characters"});
  }
  const user=await User.findOne({email});
  if(user){
-    res.status(400).json({msg:"User already exists"});
+  return  res.status(400).json({msg:"User already exists"});
  }
  const hashedpassword=await bcrypt.hash(password,10);
  const data=await User.create({name,email,password:hashedpassword});
- res.status(201).json({data:"User created",data});
+ return res.status(201).json({data:"User created",data});
 
     }catch(err){
  console.log(err);
