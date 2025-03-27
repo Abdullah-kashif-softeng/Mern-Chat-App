@@ -25,14 +25,14 @@ const {signUp, isSigningUP}=useAuthStore();
   }
   return (
   <>
-  <h1>Hello now</h1>
-  <form action={handleSubmit}>
-  <input type="email" className="bg-amber-500 text-black" name="email"/>
-  <input type="password" className="bg-amber-500 text-black" name="password" placeholder="password"/>
-  <input type="text" className="bg-amber-500 text-black" name="name"/>
-  <button type="submit">Done</button>
+  <div className="flex justify-center items-center h-screen">
+  <form className="flex flex-col w-[480px]" action={handleSubmit}>
+  <input type="email" className="bg-white text-black mb-4" name="email" placeholder="Email"/>
+  <input type="password" className="bg-white text-black mb-4" name="password" placeholder="password"/>
+  <input type="text" className="bg-white text-black mb-4" name="name" placeholder="name"/>
+  <button className="rounded-4xl border-green-600 border-4 bg-black" type="submit">Done</button>
   </form>
-
+  </div>
   </>
   )
 }

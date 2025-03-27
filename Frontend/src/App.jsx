@@ -19,7 +19,7 @@ const App = () => {
   console.log(authUser);
   return (
     <>
-    <div>
+    <div className='bg-amber-400 h-screen w-auto flex flex-col'>
     <Navbar/>
 
     <Routes>
