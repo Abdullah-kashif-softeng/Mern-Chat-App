@@ -8,28 +8,30 @@ const SignupPage = () => {
     email:""
   })
 const {signUp, isSigningUP}=useAuthStore();
-  const handleSubmit=async(formData)=>{
-  const email=formData.get("email")
-  const password=formData.get("password")
-  const fullname=formData.get("name")
-  setFormData(prevData=>(
-    {
-      ...prevData,
-      email:email,
-      password:password,
-      name:fullname
-    }
-  ))
- await signUp(fformData)
- console.log(email);
+  const handleSubmit=async()=>{
+ await signUp(fformData);
   }
+  function handlepass(){
+    setShowPassword(prev=>!prev)
+  }
+ 
   return (
   <>
   <div className="flex justify-center items-center h-screen">
   <form className="flex flex-col w-[480px]" action={handleSubmit}>
-  <input type="email" className="bg-white text-black mb-4" name="email" placeholder="Email"/>
-  <input type="password" className="bg-white text-black mb-4" name="password" placeholder="password"/>
-  <input type="text" className="bg-white text-black mb-4" name="name" placeholder="name"/>
+  <input type="email" className="bg-white text-black mb-4" name="email" placeholder="Email" onChange={(e)=>setFormData((prevData=>({
+    ...prevData,
+    email:e.target.value
+  })))}/>
+  <input type={showPassword?"text":"password"} className="bg-white text-black mb-4" name="password" placeholder="password" onChange={(e)=>setFormData((prevData=>({
+    ...prevData,
+    password:e.target.value
+  })))}/>
+  <button type="button" onClick={handlepass}>{showPassword==true?"Hidepasswords":"Showpassword"}</button>
+  <input type="text" className="bg-white text-black mb-4" name="name" placeholder="name" onChange={(e)=>setFormData((prevData=>({
+    ...prevData,
+    name:e.target.value
+  })))}/>
   <button className="rounded-4xl border-green-600 border-4 bg-black" type="submit">Done</button>
   </form>
   </div>
