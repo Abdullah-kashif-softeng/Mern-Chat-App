@@ -1,5 +1,6 @@
 import { useAuthStore } from "../store/useAuthStore.js"
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom';
 const SignupPage = () => {
   const [showPassword,setShowPassword]=useState(false);
   const [fformData,setFormData]=useState({
@@ -7,9 +8,11 @@ const SignupPage = () => {
     password:"",
     email:""
   })
+  const navigate = useNavigate();
 const {signUp, isSigningUP}=useAuthStore();
   const handleSubmit=async()=>{
  await signUp(fformData);
+ navigate("/login");
   }
   function handlepass(){
     setShowPassword(prev=>!prev)
